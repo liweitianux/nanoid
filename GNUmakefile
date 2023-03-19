@@ -14,7 +14,6 @@ lib: libnanoid.so
 libnanoid.so: nanoid.c nanoid.h
 	$(CC) $(CFLAGS) -fPIC -shared -o $@ $^
 
-# Require Lua >=5.2 or LuaJIT >=2.1
 lualib: nanoid.so
 nanoid.so: nanoid_lua.c nanoid.c nanoid.h
 	$(CC) $(CFLAGS) -fPIC -shared -I$(LUA_INCLUDE) -o $@ $^

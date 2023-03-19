@@ -41,6 +41,12 @@
 
 #include "nanoid.h"
 
+/* NOTE: luaL_newlib() is available in Lua >=5.2 or LuaJIT >=2.1 */
+#ifndef luaL_newlib
+#define luaL_newlib(L, l) \
+        (lua_newtable(L), luaL_register(L, NULL, l))
+#endif
+
 
 static int
 l_generate(lua_State *L)
@@ -74,7 +80,6 @@ luaopen_nanoid(lua_State *L)
         { "generate", l_generate },
         { NULL, NULL },
     };
-    /* NOTE: require Lua >=5.2 or LuaJIT >=2.1 */
     luaL_newlib(L, funcs);
 
     /* Constants */
