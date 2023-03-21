@@ -16,7 +16,7 @@ libnanoid.so: nanoid.c nanoid.h
 
 lualib: nanoid.so
 nanoid.so: nanoid_lua.c nanoid.c nanoid.h
-	$(CC) $(CFLAGS) -fPIC -shared -I$(LUA_INCLUDE) -o $@ $^
+	$(CC) $(CFLAGS) -fPIC -shared -I$(LUA_INCDIR) -o $@ $^
 
 clean:
 	rm -f nanoid libnanoid.so nanoid.so
