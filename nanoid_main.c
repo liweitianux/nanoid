@@ -44,16 +44,16 @@ static size_t speed_count = 1000000; /* iterations for speed test */
 static void usage(void);
 
 
-static uint64_t
+static size_t
 timespec_diff(struct timespec *tend, struct timespec *tstart)
 {
-    uint64_t t;
+    long int t;
 
-    t = (tend->tv_sec - tstart->tv_sec) * 1000000000UL;
+    t = (tend->tv_sec - tstart->tv_sec) * 1000000000L;
     t += tend->tv_nsec;
     t -= tstart->tv_nsec;
 
-    return t;
+    return (size_t)t;
 }
 
 
@@ -110,8 +110,7 @@ static int
 cmd_speed(int argc, char *argv[])
 {
     struct timespec tstart, tend;
-    uint64_t t;
-    size_t count, burnin, length, i;
+    size_t count, burnin, length, i, t;
     char *buf, *endp;
     int opt;
 
@@ -173,7 +172,7 @@ cmd_speed(int argc, char *argv[])
     clock_gettime(CLOCK_MONOTONIC, &tend);
 
     t = timespec_diff(&tend, &tstart);
-    printf("Speed: %zu ns/id\n", t / count);
+    printf("Speed: %zu ns/id, %zu id/s\n", t / count, 1000000000UL * count / t);
 
     free(buf);
     return 0;
