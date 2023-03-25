@@ -36,6 +36,7 @@
 #include <unistd.h> /* getopt() */
 
 #include "nanoid.h"
+#include "nanoid_test.c"
 
 
 static char *progname;
@@ -179,6 +180,38 @@ cmd_speed(int argc, char *argv[])
 }
 
 
+static int
+cmd_test(int argc, char *argv[])
+{
+    struct sample *s;
+    size_t count, i;
+    int rc;
+    char buf[NANOID_SIZE];
+
+    count = speed_count;
+
+    (void)argv;
+    if (argc != optind)
+        usage();
+
+    s = sample_new();
+    if (s == NULL) {
+        fprintf(stderr, "ERROR: failed to create sample\n");
+        exit(1);
+    }
+
+    for (i = 0; i < count; ++i) {
+        nanoid_generate_r(buf, sizeof(buf), NULL, 0);
+        sample_add(s, buf, sizeof(buf));
+    }
+
+    rc = sample_do_test(s);
+
+    sample_free(s);
+    return rc;
+}
+
+
 static void
 usage(void)
 {
@@ -196,7 +229,10 @@ usage(void)
             "    -c: specify the test iterations (default: %zu)\n"
             "    -l: specify the custom ID length\n"
             "\n"
-            , progname, progname, speed_count);
+            "Distribution uniformity test:\n"
+            ">>> %s test\n"
+            "\n"
+            , progname, progname, speed_count, progname);
     exit(1);
 }
 
@@ -216,6 +252,9 @@ main(int argc, char *argv[])
     if (strcmp(cmd, "speed") == 0) {
         optind++;
         return cmd_speed(argc, argv);
+    } else if (strcmp(cmd, "test") == 0) {
+        optind++;
+        return cmd_test(argc, argv);
     } else {
         return cmd_generate(argc, argv);
     }

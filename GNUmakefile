@@ -9,8 +9,10 @@ ifneq ($(DEBUG),)
 CFLAGS+=-ggdb3 -O0 -UNDEBUG -DDEBUG
 endif
 
+LDFLAGS=-lm
+
 nanoid: nanoid_main.c nanoid.c nanoid.h
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 lib: libnanoid.so
 libnanoid.so: nanoid.c nanoid.h
