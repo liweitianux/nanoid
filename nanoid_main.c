@@ -205,7 +205,7 @@ cmd_test(int argc, char *argv[])
         sample_add(s, buf, sizeof(buf));
     }
 
-    rc = sample_do_test(s);
+    rc = sample_test(s);
 
     sample_free(s);
     return rc;

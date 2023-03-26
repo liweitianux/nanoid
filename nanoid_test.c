@@ -185,11 +185,18 @@ sample_add(struct sample *s, const void *id, size_t len)
 }
 
 
-static double
-sample_chisq(struct sample *s)
+/*
+ * Perform a chi-square test to check whether or not the sample distribution
+ * is uniform.
+ */
+static int
+sample_test(struct sample *s)
 {
-    double exp, chisq, v;
-    size_t alphacnt, i;
+    const double alpha = 0.05; /* significance level */
+    double exp, chisq, pvalue, v;
+    int dof, alphacnt, i;
+
+    printf("Sample: size=%zu, len=%zu\n", s->size, s->len);
 
     alphacnt = 0;
     for (i = 0; i < 256; ++i) {
@@ -197,8 +204,10 @@ sample_chisq(struct sample *s)
             alphacnt++;
         }
     }
+    dof = alphacnt - 1;
 
     exp = (double)(s->size * s->len) / (double)alphacnt;
+    printf("dof=%d, expectation=%.3f\n", dof, exp);
 
     chisq = 0;
     for (i = 0; i < 256; ++i) {
@@ -207,30 +216,14 @@ sample_chisq(struct sample *s)
             chisq += v * v / exp;
         }
     }
-
-    return chisq;
-}
-
-
-static int
-sample_do_test(struct sample *s)
-{
-    const double alpha = 0.05; /* significance level */
-    double chisq, pvalue;
-    int dof;
-
-    printf("Sample: size=%zu, len=%zu\n", s->size, s->len);
-
-    dof = (int)s->len - 1;
-    chisq = sample_chisq(s);
     pvalue = chisq_p(chisq, dof);
-    printf("chisq=%.6f, dof=%d, p-value=%.4f\n", chisq, dof, pvalue);
+    printf("chisq=%.6f, p-value=%.4f\n", chisq, pvalue);
 
     if (pvalue >= alpha) {
-        printf("Distribution is uniform.\n");
+        printf("Distribution is uniform (alpha=%.4f).\n", alpha);
         return 0;
     } else {
-        printf("Distribution is NOT uniform!\n");
+        printf("Distribution is NOT uniform (alpha=%.4f)!\n", alpha);
         return 1;
     }
 }
