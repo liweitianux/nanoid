@@ -37,7 +37,6 @@ Returns the generated ID, or nil if error occurred.
 --]]
 
 local ffi = require("ffi")
-local C = ffi.C
 
 
 -- Load library by searching 'package.cpath'.
