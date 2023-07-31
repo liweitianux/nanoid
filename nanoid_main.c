@@ -249,7 +249,9 @@ main(int argc, char *argv[])
     }
 
     cmd = argv[1];
-    if (strcmp(cmd, "speed") == 0) {
+    if (strcmp(cmd, "-h") == 0 || strcmp(cmd, "--help") == 0) {
+        usage();
+    } else if (strcmp(cmd, "speed") == 0) {
         optind++;
         return cmd_speed(argc, argv);
     } else if (strcmp(cmd, "test") == 0) {
