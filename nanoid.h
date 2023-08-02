@@ -32,6 +32,10 @@
 /* ID default size/length (without the terminating NUL) */
 #define NANOID_SIZE     21
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * Generates an ID of length <buflen> and stores into <buf>, using alphabet
  * <alphabet> of size <alphacnt>.
@@ -58,5 +62,8 @@ void *nanoid_generate_r(void *buf, size_t buflen,
  */
 const char *nanoid_generate(const unsigned char *alphabet, size_t alphacnt);
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif
