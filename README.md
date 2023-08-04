@@ -91,6 +91,54 @@ Distribution uniformity test:
 >>> ./nanoid test
 ```
 
+Benchmark
+---------
+* Machine: ThinkPad T490, Intel i5-8265U 1.6GHz, 24GB RAM
+* Operating System: Debian GNU/Linux trixie (testing), amd64, Linux 6.3.0
+
+### C
+(Compiler: GCC 12.3.0)
+```
+% ./nanoid speed -c 2000000
+Burning in ... (n=200000)
+Running speed test ... (n=2000000)
+Speed: 295 ns/id, 3385528 id/s
+```
+
+### Lua 5.1
+(Lua: 5.1.5, installed from Debian repository)
+```
+% lua5.1 t/benchmark.lua
+>>> Lua C Interface
+Burning in ... (n=200000)
+Running test ... (n=2000000)
+Speed: 484 ns/id, 2065343 id/s
+```
+
+### Lua 5.4
+(Lua: 5.4.4, installed from Debian repository)
+```
+% lua5.4 t/benchmark.lua
+>>> Lua C Interface
+Burning in ... (n=200000)
+Running test ... (n=2000000)
+Speed: 414 ns/id, 2413884 id/s
+```
+
+### LuaJIT 2.1
+(LuaJIT: 2.1.0-beta3, installed from Debian repository)
+```
+% luajit t/benchmark.lua
+>>> Lua C Interface
+Burning in ... (n=200000)
+Running test ... (n=2000000)
+Speed: 410 ns/id, 2438729 id/s
+>>> LuaJIT FFI Interface
+Burning in ... (n=200000)
+Running test ... (n=2000000)
+Speed: 693 ns/id, 1441711 id/s
+```
+
 Credits
 -------
 * [ai/nanoid](https://github.com/ai/nanoid)
