@@ -4,6 +4,10 @@ Nano ID
 A tiny, secure, URL-friendly, unique string ID generator for C and Lua/LuaJIT
 (both C API and LuaJIT FFI API).
 
+This Lua module is also available on
+[LuaRocks as `lua-nanoid`](https://luarocks.org/modules/liweitianux/lua-nanoid)
+and can be installed with `luarocks install lua-nanoid`.
+
 For the Nano ID description and algorithm, please refer to
 [ai/nanoid](https://github.com/ai/nanoid).
 
