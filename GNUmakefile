@@ -12,15 +12,15 @@ endif
 LDFLAGS=-lm
 
 nanoid: nanoid_main.c nanoid.c nanoid.h
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(filter %.c,$^) $(LDFLAGS)
 
 lib: libnanoid.so
 libnanoid.so: nanoid.c nanoid.h
-	$(CC) $(CFLAGS) -fPIC -shared -o $@ $^
+	$(CC) $(CFLAGS) -fPIC -shared -o $@ $(filter %.c,$^)
 
 lualib: nanoid.so
 nanoid.so: nanoid_lua.c nanoid.c nanoid.h
-	$(CC) $(CFLAGS) -fPIC -shared -I$(LUA_INCDIR) -o $@ $^
+	$(CC) $(CFLAGS) -fPIC -shared -I$(LUA_INCDIR) -o $@ $(filter %.c,$^)
 
 clean:
 	rm -f nanoid libnanoid.so nanoid.so
