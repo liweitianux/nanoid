@@ -1,4 +1,5 @@
-package = "nanoid"
+-- Package 'nanoid' already exists, so change to use 'lua-nanoid'.
+package = "lua-nanoid"
 version = "master-1"
 
 description = {
@@ -7,7 +8,9 @@ description = {
     license = "MIT",
 }
 
-dependencies = {}
+dependencies = {
+    "lua >= 5.1",
+}
 
 source = {
     url = "git://github.com/liweitianux/nanoid",
