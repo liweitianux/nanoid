@@ -1,11 +1,11 @@
 Nano ID
 =======
 
-A tiny, secure, URL-friendly, unique string ID generator for C and Lua
+A tiny, secure, URL-friendly, unique string ID generator for C and Lua/LuaJIT
 (both C API and LuaJIT FFI API).
 
 For the Nano ID description and algorithm, please refer to
-[ai's nanoid](https://github.com/ai/nanoid).
+[ai/nanoid](https://github.com/ai/nanoid).
 
 C Interface
 -----------
