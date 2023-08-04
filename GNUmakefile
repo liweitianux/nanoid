@@ -23,4 +23,4 @@ nanoid.so: nanoid_lua.c nanoid.c nanoid.h
 	$(CC) $(CFLAGS) -fPIC -shared -I$(LUA_INCDIR) -o $@ $(filter %.c,$^)
 
 clean:
-	rm -f nanoid libnanoid.so nanoid.so
+	rm -f nanoid libnanoid.so nanoid.so *.gch
