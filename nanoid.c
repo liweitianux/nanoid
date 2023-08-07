@@ -27,8 +27,8 @@
  * https://github.com/ai/nanoid
  */
 
-#include <sys/random.h> /* getrandom() */
 #include <stdint.h>
+#include <unistd.h> /* getentropy() */
 
 #include "nanoid.h"
 
@@ -87,7 +87,7 @@ nanoid_generate_r(void *buf, size_t buflen, const unsigned char *alphabet,
     unsigned char bytes[32];
     size_t len = 0;
     while (1) {
-        getrandom(bytes, sizeof(bytes), 0);
+        getentropy(bytes, sizeof(bytes));
         size_t i, ai;
         for (i = 0; i < sizeof(bytes); ++i) {
             ai = bytes[i] & mask;
