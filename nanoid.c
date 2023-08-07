@@ -29,6 +29,7 @@
 
 #include <errno.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <unistd.h> /* getentropy() */
 
 #include "nanoid.h"
@@ -101,7 +102,7 @@ nanoid_generate_r(void *buf, size_t buflen, const unsigned char *alphabet,
         }
     }
 
-    return NULL;
+    abort(); /* Shouldn't happen. */
 }
 
 
