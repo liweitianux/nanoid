@@ -3,7 +3,7 @@ package = "lua-nanoid"
 version = "1.0.0-1"
 
 description = {
-    summary = "A tiny, secure, URL-friendly, unique string ID generator",
+    summary = "A tiny, secure, URL-friendly, unique string ID generator for Lua/LuaJIT",
     homepage = "https://github.com/liweitianux/nanoid",
     license = "MIT",
 }
