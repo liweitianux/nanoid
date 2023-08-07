@@ -28,7 +28,8 @@ Generates an ID of length `buflen` and stores into `buf`, using the given
 alphabet `alphabet` of size `alphacnt`.  If `alphabet` is `NULL`, then the
 default alphabet is used; `alphacnt` is also ignored in this case.
 
-Returns a pointer to `buf` on success, or `NULL` on error.
+Returns a pointer to `buf` on success, or `NULL` on error with `errno`
+indicating the error reason.
 
 This function is reentrantable (i.e., thread-safe), as indicated by the `_r`
 suffix.
@@ -42,7 +43,8 @@ Generates an ID of the default length (i.e., 21 as defined by `NANOID_SIZE`),
 using the alphabet `alphabet` of size `alphacnt` if it isn't `NULL`.
 
 This function uses an *internal static buffer* to store the ID and returns a
-pointer to the internal buffer on success, or `NULL` on error.
+pointer to the internal buffer on success, or `NULL` on error with `errno`
+indicating the error reason
 
 Lua C Interface
 ---------------

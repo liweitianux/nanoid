@@ -27,6 +27,7 @@
  * https://github.com/ai/nanoid
  */
 
+#include <errno.h>
 #include <stdint.h>
 #include <unistd.h> /* getentropy() */
 
@@ -73,6 +74,7 @@ nanoid_generate_r(void *buf, size_t buflen, const unsigned char *alphabet,
     }
 
     if (alphacnt <= 1 || alphacnt >= 256) {
+        errno = EINVAL;
         return NULL;
     }
 
