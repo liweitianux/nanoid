@@ -30,9 +30,9 @@
 #include <errno.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <unistd.h> /* getentropy() */
 
 #include "nanoid.h"
+#include "nanoid_rand.h"
 
 /* Alphabet: A-Za-z0-9-_ (i.e., base64url; see RFC 4648, Section 5) */
 static const unsigned char default_alphabet[] =
@@ -90,7 +90,9 @@ nanoid_generate_r(void *buf, size_t buflen, const unsigned char *alphabet,
     unsigned char bytes[32];
     size_t len = 0;
     while (1) {
-        getentropy(bytes, sizeof(bytes));
+        if (generate_randombytes(bytes, sizeof(bytes)) == -1)
+            return NULL;
+
         size_t i, ai;
         for (i = 0; i < sizeof(bytes); ++i) {
             ai = bytes[i] & mask;
