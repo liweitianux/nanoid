@@ -11,6 +11,20 @@ and can be installed with `luarocks install lua-nanoid`.
 For the Nano ID description and algorithm, please refer to
 [ai/nanoid](https://github.com/ai/nanoid).
 
+Supported operating systems:
+- DragonFly BSD
+- FreeBSD
+- NetBSD
+- OpenBSD
+- Linux
+- macOS
+
+Supported random sources:
+- `getentropy()`
+- `getrandom()`
+- `arc4random_buf()`
+- `/dev/urandom`
+
 C Interface
 -----------
 ### Usage
@@ -101,6 +115,7 @@ Benchmark
 ---------
 * Machine: ThinkPad T490, Intel i5-8265U 1.6GHz, 24GB RAM
 * Operating System: Debian GNU/Linux trixie (testing), amd64, Linux 6.3.0
+* Random source: `getentropy(3)` (glibc >= 2.25)
 
 ### C
 (Compiler: GCC 12.3.0)
