@@ -79,11 +79,15 @@
 #endif
 
 #if defined(HAVE_GETENTROPY)
-#include <unistd.h> /* getentropy() */
+#  if defined(__APPLE__)
+#    include <sys/random.h> /* macOS is so weird ... */
+#  else
+#    include <unistd.h>
+#  endif
 #elif defined(HAVE_GETRANDOM)
-#include <sys/random.h> /* getrandom() */
+#include <sys/random.h>
 #elif defined(HAVE_ARC4RANDOM_BUF)
-#include <stdlib.h> /* arc4random_buf() */
+#include <stdlib.h>
 #else
 #include <errno.h>
 #include <fcntl.h> /* open() */
